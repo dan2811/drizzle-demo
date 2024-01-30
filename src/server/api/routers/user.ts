@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { roles, users } from "~/server/db/schema";
+import { users } from "~/server/db/schema";
 
 export const userRouter = createTRPCRouter({
   create: publicProcedure
@@ -13,15 +13,23 @@ export const userRouter = createTRPCRouter({
         roleId: z.number(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(({ ctx, input }) => {
       return ctx.db.insert(users).values(input);
     }),
-
-  getUsers: publicProcedure.query(async ({ ctx }) => {
+  getUsers: publicProcedure.query(({ ctx }) => {
     return ctx.db.query.users.findMany({
       with: {
         role: true,
       },
     });
   }),
+  delete: publicProcedure
+    .input(
+      z.object({
+        userId: z.number(),
+      }),
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.db.delete(users).where(eq(users.id, input.userId));
+    }),
 });

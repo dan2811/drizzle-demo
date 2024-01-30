@@ -6,7 +6,11 @@ import toast from "react-hot-toast";
 
 import { api } from "~/trpc/react";
 
-export function CreateUser() {
+interface CreateUserProps {
+  refetchUsers: () => void;
+}
+
+export function CreateUser({ refetchUsers }: CreateUserProps) {
   const { data: roles } = api.role.getAll.useQuery();
 
   const router = useRouter();
@@ -16,7 +20,7 @@ export function CreateUser() {
 
   const createUser = api.user.create.useMutation({
     onSuccess: () => {
-      router.refresh();
+      refetchUsers();
       setName("");
       setAge(18);
       setRoleId("default");
@@ -28,8 +32,12 @@ export function CreateUser() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        if (!name || typeof name !== "string") {
+          toast.error("Please enter a valid name");
+          return;
+        }
         if (!roleId || typeof roleId !== "number") {
-          window.alert("Please select a role");
+          toast.error("Please select a role");
           return;
         }
         createUser.mutate({ name, age, roleId });
