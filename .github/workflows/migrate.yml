@@ -1,0 +1,36 @@
+name: Run DB Migrations
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on:
+      ubuntu-latest
+
+      # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.version }}
+
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Node LTS setup
+        uses: actions/setup-node@v3
+
+      # run steps on client directory
+      - name: Install packages
+        run: bun install
+
+      - name: Create new Migrations
+        run: bun run db:generate
+
+      - name: Run Migrations
+        run: bun run db:migrate
