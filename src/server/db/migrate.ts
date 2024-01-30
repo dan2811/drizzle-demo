@@ -12,5 +12,5 @@ try {
 } finally {
   console.log("CLOSING CONNECTION");
   // Don't forget to close the connection, otherwise the script will hang
-  client.end();
+  void client.end();
 }
