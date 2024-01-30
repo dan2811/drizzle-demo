@@ -31,3 +31,10 @@ export const roleRelations = relations(roles, ({ many }) => {
     users: many(users),
   };
 });
+
+export const dogs = pgTable("dogs", {
+  id: serial("id").primaryKey(),
+  name: varchar("name"),
+  age: integer("age"),
+  breed: varchar("breed")
+});
