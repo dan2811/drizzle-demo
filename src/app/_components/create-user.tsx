@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { api } from "~/trpc/react";
 
@@ -17,6 +18,9 @@ export function CreateUser() {
     onSuccess: () => {
       router.refresh();
       setName("");
+      setAge(18);
+      setRoleId("default");
+      toast.success("User created!");
     },
   });
 
