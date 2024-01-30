@@ -17,7 +17,7 @@ const UsersList = async () => {
   const users = await api.user.getUsers.query();
   return (
     <div className="flex w-full max-w-xs flex-col gap-y-7">
-      <h2 className="text-4xl">All user</h2>
+      <h2 className="text-4xl">All users</h2>
       {users.map(({ id, name, age, role }) => (
         <div
           key={id}
