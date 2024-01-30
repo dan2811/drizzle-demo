@@ -4,11 +4,11 @@ import * as schema from "./schema";
 import { env } from "~/env";
 
 export const client = new Client({
-  host: env.HOST,
-  port: env.PORT,
-  user: env.USER,
-  password: env.PASSWORD,
-  database: env.DATABASE,
+  host: env.DB_HOST,
+  port: parseInt(env.DB_PORT),
+  user: env.DB_USER,
+  password: env.DB_PASSWORD,
+  database: env.DB_NAME,
 });
 
 await client.connect();

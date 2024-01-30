@@ -7,11 +7,11 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    HOST: z.string(),
-    PORT: z.number(),
-    USER: z.string(),
-    PASSWORD: z.string(),
-    DATABASE: z.string(),
+    DB_HOST: z.string(),
+    DB_PORT: z.string(),
+    DB_USER: z.string(),
+    DB_PASSWORD: z.string(),
+    DB_NAME: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -31,11 +31,11 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
-    HOST: process.env.HOST,
-    PORT: process.env.PORT,
-    USER: process.env.USER,
-    PASSWORD: process.env.PASSWORD,
-    DATABASE: process.env.DATABASE,
+    DB_HOST: process.env.DB_HOST,
+    DB_PORT: process.env.DB_PORT,
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_NAME: process.env.DB_NAME,
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
