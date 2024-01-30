@@ -31,8 +31,11 @@ export const UsersList = ({
       <h2 className="text-4xl">All users</h2>
       {users?.length === 0 && <span>No users yet</span>}
       {users?.map(({ id, name, age, role }) => (
-        <div className="flex min-w-full rounded-md border-2 border-solid border-x-zinc-50 p-4">
-          <div key={id} className="flex flex-grow flex-col pr-4">
+        <div
+          key={id}
+          className="flex min-w-full rounded-md border-2 border-solid border-x-zinc-50 p-4"
+        >
+          <div className="flex flex-grow flex-col pr-4">
             <span>ID: {id}</span>
             <span>Name: {name}</span>
             <span>Age: {age}</span>
