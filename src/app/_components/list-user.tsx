@@ -39,7 +39,9 @@ export const UsersList = ({
             <span>ID: {id}</span>
             <span>Name: {name}</span>
             <span>Age: {age}</span>
-            <span>Role: {role.name}</span>
+            <a href="/roles">
+              <span>Role: {role.name}</span>
+            </a>
           </div>
           <button
             className="h-fit rounded-md bg-pink-700 p-2 text-white"

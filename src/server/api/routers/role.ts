@@ -1,7 +1,8 @@
+import { eq, sql } from "drizzle-orm";
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { roles } from "~/server/db/schema";
+import { roles, users } from "~/server/db/schema";
 
 export const roleRouter = createTRPCRouter({
   create: publicProcedure
@@ -11,6 +12,13 @@ export const roleRouter = createTRPCRouter({
     }),
 
   getAll: publicProcedure.query(async ({ ctx }) => {
-    return ctx.db.query.roles.findMany();
+    const result = await ctx.db
+      .select({ role: roles, countUserId: sql<number>`COUNT(${users.id})` })
+      .from(roles)
+      .leftJoin(users, eq(roles.id, users.roleId))
+      .groupBy(roles.id);
+
+    console.log(result);
+    return result;
   }),
 });
