@@ -1,5 +1,7 @@
 # Drizzle Demo
 
+Live example: https://drizzle-demo.vercel.app/
+
 ## Get Started:
 
 1. Create a postgres DB and fill in the connection details in .env
