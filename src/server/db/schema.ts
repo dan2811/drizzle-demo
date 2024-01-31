@@ -36,5 +36,10 @@ export const dogs = pgTable("dogs", {
   id: serial("id").primaryKey(),
   name: varchar("name"),
   age: integer("age"),
-  breed: varchar("breed")
+  breed: varchar("breed"),
+});
+
+export const things = pgTable("dogs", {
+  id: serial("id").primaryKey(),
+  name: varchar("name"),
 });
